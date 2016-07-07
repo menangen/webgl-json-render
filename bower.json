@@ -1,0 +1,15 @@
+{
+  "name": "webgl",
+  "authors": [
+    "Andru Menangen <menangen@gmail.com>"
+  ],
+  "description": "2d pixel noise rendering",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "pixi.js": "pixi#^3.0.11",
+    "zepto": "^1.1.6"
+  }
+}
