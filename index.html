@@ -7,96 +7,10 @@
     <script src="bower_components/pixi.js/bin/pixi.js"></script>
     <script src="bower_components/zepto/zepto.js"></script>
 
-
+    <script src="js/settings.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body>
-
-<script>
-
-    console.log("started");
-
-    let WebGLArea = {width: 1200, height: 1000};
-    let Square = {size: 5};
-    let colorTable = [0xFF0000, 0x00FF00, 0x0000FF];
-
-
-    let pixels = [];
-    
-    pixels[0] = 0x372915;
-    pixels[1] = 0x59410e;
-    pixels[2] = 0x44371c;
-    pixels[3] = 0x393428;
-    pixels[4] = 0x3c3b3a;
-    pixels[5] = 0x3c3b3F;
-    pixels[6] = 0x2c2b2a;
-    pixels[7] = 0x202022;
-    pixels[8] = 0x1D1D1F;
-    pixels[9] = 0x14141A;
-
-    var renderer = new PIXI.WebGLRenderer(WebGLArea.width, WebGLArea.height);
-    document.body.appendChild(renderer.view);
-
-    var stage = new PIXI.Container();
-
-    var graphics = new PIXI.Graphics();
-
-    loadingJSON = function () {
-
-        $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:5000/json',
-            dataType: 'json',
-            context: $('body'),
-            success: function(data){
-                // console.log(data.map);
-                var map = data.map;
-
-                let Area = {width: map[0].length, height: map.length};
-
-                for (let y = 0; y < Area.height; y++) {
-                    for (let x = 0; x < Area.width; x++) {
-
-                        var pixelBlockData = map[y][x];
-                        var color = pixels[pixelBlockData];
-
-                        if(typeof color === 'undefined') {
-                            // does not exist
-                            color = 0x000000;
-                        }
-
-
-                        graphics.beginFill(color);
-
-
-                        graphics.drawRect(x * Square.size, y * Square.size, Square.size, Square.size);
-                    }
-                }
-
-
-                stage.addChild(graphics);
-
-                renderer.render(stage);
-
-
-
-            },
-            error: function(xhr, type){
-                alert('Ajax error!')
-            }
-        })
-
-    };
-
-    $("body").on("click", function () {
-        loadingJSON();
-    });
-
-    $(document).ready(loadingJSON);
-
-
-
-
-</script>
 
 </body>
 </html>
