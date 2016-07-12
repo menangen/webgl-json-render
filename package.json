@@ -1,0 +1,23 @@
+{
+  "name": "webgl",
+  "version": "0.0.1",
+  "description": "webgl 2d rendering",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menangen/webgl-json-render.git"
+  },
+  "author": "menangen@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/menangen/webgl-json-render/issues"
+  },
+  "homepage": "https://github.com/menangen/webgl-json-render#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jade": "^1.11.0"
+  }
+}
