@@ -4,6 +4,8 @@ let perlin = require('./js/perlin/index');
 let express = require('express');
 
 let app = express();
+app.use(express.static('.'));
+
 const port = 5000;
 
 //app.set('view engine', 'jade');
@@ -18,6 +20,6 @@ app.get('/json', function (req, res) {
     res.send(responseMapJson);
 });
 
-app.listen(port);
+app.listen(port, 'localhost');
 
 console.log(`Started on port ${port}`);

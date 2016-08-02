@@ -109,19 +109,12 @@ const middle_mountains = () => {
                 "type": 3
             });
 
-            //let current_altitude = altitude - middle_noise[y][x];
+            let current_altitude = altitude - middle_noise[y][x];
 
-            let value = Math.floor(perlin_noise * rock_mass + altitude);
+            let value = Math.floor(perlin_noise * rock_mass + current_altitude);
 
             if (value > 9) value = 9;
-            else if (0 < value < 2) {
-
-                value = 1;
-
-            }
-            else {
-                value = 0;
-            }
+            if (value < 0) value = 0;
 
             x_array.push( value );
         }
