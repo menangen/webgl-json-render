@@ -116,6 +116,24 @@ const middle_mountains = () => {
             if (value > 9) value = 9;
             if (value < 0) value = 0;
 
+            if (value == 0) {
+
+                const sandOctaves = 4;
+                const sandFreq = 4.0 * sandOctaves;
+                const sandNoise = addon.perlin2({
+                    "x": x / sandFreq,
+                    "y": y / sandFreq,
+                    "octaves": sandOctaves,
+                    "persistence": 0.3,
+                    "lacunarity": 2.7,
+                    "base": 0,
+                    "type": 0
+                });
+
+                value = Math.floor(sandNoise * 0.6 + 0.9);
+                if (value < 0) value = 0;
+            }
+
             x_array.push( value );
         }
         map.push(x_array);
