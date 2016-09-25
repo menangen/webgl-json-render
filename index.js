@@ -11,6 +11,8 @@ const port = 5000;
 //app.set('view engine', 'jade');
 
 app.get('/json', function (req, res) {
+    console.log('Recived JSON request');
+
     console.time('perlin');
 
     let responseMapJson = {"map": perlin.middle_mountains()}; //console.log(responseMapJson);

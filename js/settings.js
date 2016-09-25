@@ -1,7 +1,12 @@
 /**
  * Created by menangen on 08.07.16.
  */
-setPixelsColor = function () {
+let Map = {
+    width: 650,
+    height: 350
+};
+
+let setPixelsColor = () => {
     window.pixels = [];
 
     pixels[0] = 0x372915;
@@ -30,3 +35,10 @@ setPixelsColor = function () {
 
     console.log("Color table loaded");
 };
+
+if (typeof module !== 'undefined') {
+    module.exports = Map;
+}
+else {
+    console.log('client side')
+}

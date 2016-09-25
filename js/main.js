@@ -2,14 +2,16 @@
  * Created by menangen on 08.07.16.
  */
 
-loadingJSON = function () {
+loadingJSON = () => {
+
+    console.log('Request JSON');
 
     $.ajax({
         type: 'GET',
         url: 'http://localhost:5000/json',
         dataType: 'json',
         context: $('body'),
-        success: function(data){
+        success: data => {
             // console.log(data.map);
             var map = data.map;
 
@@ -42,7 +44,7 @@ loadingJSON = function () {
 
 
         },
-        error: function(xhr, type){
+        error: (xhr, type) => {
             alert('Ajax error!')
         }
     })
@@ -50,7 +52,7 @@ loadingJSON = function () {
 };
 
 
-$(document).ready(function() {
+$(document).ready(() => {
     setPixelsColor();
     loadingJSON();
 
