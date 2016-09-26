@@ -14,7 +14,7 @@ const getRandom = (min, max) => {
 
 const gaussRandom = (a, b) => {
 
-    var x = getRandom(0, 1000);
+    var x = getRandom(0, 10000);
 
     return a < x && x < b;
 };
@@ -25,7 +25,7 @@ const get_altitude_luck = (pixelObject) => {
     let gold_luck = 0;
     let gem_luck = 0;
 
-    const pixels_near_center = get_around_pixels(pixelObject, around_step);
+    let pixels_near_center = get_around_pixels(pixelObject, around_step);
 
     pixels_near_center.forEach((pixel) => {
         const valueInMap = pixelObject.map[pixel[1]][pixel[0]];
@@ -48,6 +48,15 @@ const get_altitude_luck = (pixelObject) => {
 };
 
 module.exports = (map2DArray) => {
+    let setGoldWithLuck = (pixel, random, superGoldLuck) => {
+        if (gaussRandom(0, random) && get_altitude_luck(pixelObject)) {
+
+            map2DArray[pixel.y][pixel.x] = getRandom(0, superGoldLuck) == 0 ? 17 : 16;
+
+        }
+    };
+
+
     pixelObject.map = map2DArray;
 
     for (let y = 0; y < Map.height; y++) {
@@ -61,34 +70,37 @@ module.exports = (map2DArray) => {
             pixelObject.value = map2DArray[y][x];
 
             if (pixelObject.value < 16) {
-                if (pixelObject.value > 1) {
 
-
-                    switch (pixelObject.value) {
-                        case 9:
-                        case 8:
-                            if (gaussRandom(1, 50) && get_altitude_luck(pixelObject)) {
-
-                                if (getRandom(0, 2)) { map2DArray[y][x] = 17 }
-                                else { map2DArray[y][x] = 16 }
-
-                            }
-                            break;
-                        case 7:
-                            if (gaussRandom(1, 20) && get_altitude_luck(pixelObject)) {
-
-                                if (getRandom(0, 2)) { map2DArray[y][x] = 17 }
-                                else { map2DArray[y][x] = 16 }
-
-                            }
-                            break;
-
-                    }
+                switch (pixelObject.value) {
+                    case 9:
+                    case 8:
+                        setGoldWithLuck(pixelObject, 40, 2);
+                        break;
+                    case 7:
+                        setGoldWithLuck(pixelObject, 20, 2);
+                        break;
+                    case 6:
+                        setGoldWithLuck(pixelObject, 17, 2);
+                        break;
+                    case 5:
+                        setGoldWithLuck(pixelObject, 15, 3);
+                        break;
+                    case 4:
+                        setGoldWithLuck(pixelObject, 14, 6);
+                        break;
+                    case 3:
+                        setGoldWithLuck(pixelObject, 10, 8);
+                        break;
+                    case 2:
+                        setGoldWithLuck(pixelObject, 9, 10);
+                        break;
+                    case 1:
+                    case 0:
+                        setGoldWithLuck(pixelObject, 2, 20);
+                        break;
 
                 }
-                else {
 
-                }
             }
 
         }
