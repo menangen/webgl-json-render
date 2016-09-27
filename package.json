@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/menangen/webgl-json-render#readme",
   "dependencies": {
-    "express": "^4.14.0",
-    "jade": "^1.11.0"
+    "express": "^4.14.0"
   }
 }

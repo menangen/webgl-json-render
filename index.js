@@ -3,7 +3,7 @@
 let express = require('express');
 
 let perlin = require('./js/perlin');
-let goldGenerator = require('./js/treasure/goldGenerator.js');
+let treasureGenerator = require('./js/treasure/generator.js');
 
 let app = express();
 app.use(express.static('.'));
@@ -18,10 +18,10 @@ app.get('/json', function (req, res) {
 
     console.time('perlin');
 
-    let altitudeMap = perlin.middle_mountains();
-    let treasured_map = goldGenerator(altitudeMap);
+    let mapObject = perlin.middle_mountains();
+    let treasuredMap = treasureGenerator(mapObject);
 
-    let responseMapJson = {"map": treasured_map}; //console.log(responseMapJson);
+    let responseMapJson = {"map": treasuredMap}; //console.log(responseMapJson);
 
     console.timeEnd('perlin');
 

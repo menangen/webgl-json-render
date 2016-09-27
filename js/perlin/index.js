@@ -58,8 +58,11 @@ module.exports = {
 
     middle_mountains: () => {
 
+        let altitudeMap = [];
+        let chromeFerrumMap = [];
+
         const lacunarity = 2.14;
-        const persistence = 0.5;
+        var persistence = 0.5;
         let altitude = 4.5;
         const rock_mass = 7;
 
@@ -93,13 +96,11 @@ module.exports = {
         octaves = 5;
         freq = 80.0 * octaves;
 
-        let map = [];
-
         for (let y = 0; y < Map.height; y++) {
-            let x_array = [];
+            let xAltitudeArray = [];
 
             for (let x = 0; x < Map.width; x++) {
-                const perlin_noise = addon.perlin2({
+                let perlin_noise = addon.perlin2({
                     "x": x / freq,
                     "y": y / freq,
                     "octaves": octaves,
@@ -134,13 +135,48 @@ module.exports = {
                     if (value < 0) value = 0;
                 }
 
-                x_array.push( value );
+                xAltitudeArray.push( value );
+
+
             }
-            map.push(x_array);
+            altitudeMap.push(xAltitudeArray);
 
         }
 
-        return map;
+        for (let y = 0; y < Map.height; y++) {
+            let xChromeArray = [];
+
+            for (let x = 0; x < Map.width; x++) {
+                const chemicalNoiseOctaves = 2;
+
+                // Chrome and Ferrum
+                const freqChrome = 25.0 * chemicalNoiseOctaves;
+                const persistence = 2.5;
+
+                const perlin_noise = addon.perlin2({
+                    "x": x / freqChrome,
+                    "y": y / freqChrome,
+                    "octaves": chemicalNoiseOctaves,
+                    "persistence": persistence,
+                    /* TODO: fix nodeJS native addon for removing lacunarity and etc */
+                    "lacunarity": 2.0,
+                    "base": 0,
+                    "type": 0
+                });
+
+                let value = Math.floor(perlin_noise * 3.5 + 2.0);
+
+                if (value > 3) value = 3;
+                if (value < 0) value = 0;
+
+                xChromeArray.push( value );
+            }
+            chromeFerrumMap.push(xChromeArray);
+        }
+
+
+
+        return {altitudeNoise: altitudeMap, chromeFerrumNoise: chromeFerrumMap};
     }
 
 
